@@ -1,3 +1,6 @@
+
+# .env
+#  Environment variables file.  Should be used for any secrets or local-only configuration values.
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
