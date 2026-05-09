@@ -14,4 +14,8 @@ dependencies = [
     "pypdf==6.10.2",
     "python-dotenv==1.2.2",
     "sentence-transformers==5.1.1",
+    "pinecone>=5.0.0",
+    "langchain-pinecone>=0.2.0",
+    "langchain-xai>=0.2.0",
+    "langchain-classic>=1.0.0",
 ]

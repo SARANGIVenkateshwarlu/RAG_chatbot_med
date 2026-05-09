@@ -8,5 +8,8 @@ sentence-transformers==5.1.1
 pypdf==6.10.2
 python-dotenv==1.2.2
 langchain-openai==1.1.11
-# langchain-pinecone omitted; use pinecone-client directly if needed: pinecone-client==6.3.0
+pinecone>=5.0.0
+langchain-pinecone>=0.2.0
+langchain-xai>=0.2.0
+langchain-classic>=1.0.0
 

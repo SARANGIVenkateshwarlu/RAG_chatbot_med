@@ -1,29 +1,26 @@
 from dotenv import load_dotenv
 import os
-from src.helper import load_pdf_file, filter_to_minimal_docs, text_split, download_hugging_face_embeddings
+from src.helper import load_pdf_files, filter_to_minimal_docs, text_split, download_embeddings
 from pinecone import Pinecone
-from pinecone import ServerlessSpec 
+from pinecone import ServerlessSpec
 from langchain_pinecone import PineconeVectorStore
 
 load_dotenv()
 
 
-PINECONE_API_KEY=os.environ.get('PINECONE_API_KEY')
-OPENAI_API_KEY=os.environ.get('OPENAI_API_KEY')
+PINECONE_API_KEY = os.environ.get('PINECONE_API_KEY')
 
 os.environ["PINECONE_API_KEY"] = PINECONE_API_KEY
-os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 
-extracted_data=load_pdf_file(data='data/')
-filter_data = filter_to_minimal_docs(extracted_data)
-text_chunks=text_split(filter_data)
+extracted_data = load_pdf_files("data")
+minimal_docs = filter_to_minimal_docs(extracted_data)
+text_chunks = text_split(minimal_docs)
 
-embeddings = download_hugging_face_embeddings()
+embedding = download_embeddings()
 
 pinecone_api_key = PINECONE_API_KEY
 pc = Pinecone(api_key=pinecone_api_key)
-
 
 
 index_name = "medical-chatbot"  # change if desired
@@ -41,6 +38,6 @@ index = pc.Index(index_name)
 
 docsearch = PineconeVectorStore.from_documents(
     documents=text_chunks,
+    embedding=embedding,
     index_name=index_name,
-    embedding=embeddings, 
 )
